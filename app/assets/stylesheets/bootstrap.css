@@ -2554,7 +2554,7 @@ output {
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
-  background-color: #fff;
+  background-color: #ccc;
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -2581,13 +2581,13 @@ output {
   color: #999;
 }
 .form-control::-ms-expand {
-  background-color: transparent;
+  background-color: #ccc;
   border: 0;
 }
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: #eee;
+  background-color: #ccc;
   opacity: 1;
 }
 .form-control[disabled],
@@ -2595,10 +2595,12 @@ fieldset[disabled] .form-control {
   cursor: not-allowed;
 }
 textarea.form-control {
+  background-color: #ccc;
   height: auto;
 }
 input[type="search"] {
   -webkit-appearance: none;
+  background-color: #ccc;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   input[type="date"].form-control,
@@ -2698,6 +2700,7 @@ fieldset[disabled] .checkbox label {
   padding-top: 7px;
   padding-bottom: 7px;
   margin-bottom: 0;
+  background-color: #ccc;
 }
 .form-control-static.input-lg,
 .form-control-static.input-sm {
@@ -2809,6 +2812,7 @@ select[multiple].input-lg {
   width: 30px;
   height: 30px;
   line-height: 30px;
+  background-color: #ccc;
 }
 .has-success .help-block,
 .has-success .control-label,
@@ -3847,6 +3851,7 @@ select.input-group-lg > .input-group-addon,
 select.input-group-lg > .input-group-btn > .btn {
   height: 46px;
   line-height: 46px;
+  background-color: #ccc;
 }
 textarea.input-group-lg > .form-control,
 textarea.input-group-lg > .input-group-addon,
@@ -3855,6 +3860,7 @@ select[multiple].input-group-lg > .form-control,
 select[multiple].input-group-lg > .input-group-addon,
 select[multiple].input-group-lg > .input-group-btn > .btn {
   height: auto;
+  background-color: #ccc;
 }
 .input-group-sm > .form-control,
 .input-group-sm > .input-group-addon,

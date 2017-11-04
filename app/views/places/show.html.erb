@@ -138,8 +138,9 @@
                         <% end %>
                         </p>
                       
-                  </blockquote>
-                      <% if current_user!=nil %>
+                 
+                  <div> 
+                    <% if current_user!=nil %>
                           <% if Aime.exists?(liker: current_user.id, liked: @place.id) %>
                             <%= button_to  place_like_path(@place, :type => @place), method: :get, remote: true, class: 'btn primary', id:'aimer', :onclick => 'like(true)' do %>
                               <i class="fa fa-thumbs-up" style="color:darkcyan;"></i>
@@ -169,6 +170,8 @@
                             <i class="fa fa-thumbs-down" style="color:darkred;"></i>
                           <% end %>
                         <% end %>
+                  </div>
+                      
                         <% @comms=Comment.where(spot: @place.id) %>
                       <% @comms.each do |co| %>
                         <% @comm_user=User.find(co.talker) %>
@@ -177,11 +180,12 @@
                       <% end %>
               </div>
           </p>
-<%= simple_form_for Comment.new, :id => "new_comment",:controller => "places", :action => "save_comments", :remote => true do |f| %>
-    <%= f.text_area :speech %>
+<%= simple_form_for Comment.new, :id => "new_comment",:controller => "places",  :action => "save_comments", :remote => true, :class=>'form-control' do |f|  %>
+    <%= f.text_area :speech , :class=>'form-control', :style=>"width:50%", :placeholder=>"Dites ce que vous pensez de cet endroit" %>
     <% if current_user!=nil %>
       <%= f.hidden_field(:talker, :value => current_user.id) %>
     <% end %>
     <%= f.hidden_field(:spot, :value => @place.id) %>
-    <%= f.submit "Submit" %>
+    <%= f.submit "Commenter", :class => 'btn btn-primary btn-lg btn-block', :style => 'width:25%' %>
 <% end %>
+ </blockquote>
