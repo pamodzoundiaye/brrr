@@ -1,0 +1,77 @@
+
+
+<hr> 
+
+
+<section class="background-gray-lightest">
+  <div class="container">
+    
+      <% @places.each do |place| %>
+      <% if place.shared %>
+        <div class="row" >
+            <div class="post">
+              <div class="col-sm-3">
+                <!-- The image carousel -->
+                  <%= content_tag :div, class:"carousel slide", id:'myCarousele'+String(place.id), 'data-ride' => "carousel" do %> 
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                      <div class="item active">
+                        <%= image_tag place.picture1.url(), class:'img-responsive' %>
+                      </div>
+                      <% if place.picture2.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture2.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture3.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture3.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture4.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture4.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture5.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture5.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <%= content_tag :a, class:"left carousel-control", href:'#myCarousele'+String(place.id), 'data-slide' => "prev" do %>
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                      <span class="sr-only">Previous</span>
+                    <% end %>
+                    <%= content_tag :a, class:"right carousel-control", href:'#myCarousele'+String(place.id), 'data-slide' => "next" do %>
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                      <span class="sr-only">Next</span>
+                    <% end %>
+                  <% end %>
+              </div>
+              <div class="col-sm-9">
+                <h3> <%= link_to place.name, place %> </h3>
+                <p class="post__intro"> <%= place.description %></p>
+                <i class='fa fa-eye' style="color:blue"><%= String(place.views) %> </i> </i class='fa fa-toto'  style="margin-left:5%;">  </i>
+                      <i class='fa fa-heart' style="color:indianred;margin-left:5%;"><%= String(place.likes) %></i>
+                <p class="read-more"><%= link_to 'Voir en détail', place, class:'btn btn-ghost' %></p>
+              </div>
+            </div>
+         </div>
+        <hr> 
+      <% end %>
+      <% end %>
+  </div>
+
+
+
+
+
+
+
+
+
+</section>

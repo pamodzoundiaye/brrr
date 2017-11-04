@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  talker: MyString
+  spot: MyString
+  speech: MyString
+
+two:
+  talker: MyString
+  spot: MyString
+  speech: MyString

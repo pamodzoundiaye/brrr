@@ -1,0 +1,13 @@
+<%= simple_form_for(@location) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="container">
+    Ville
+    <%= f.collection_select :townName, Town.order(:name),:name,:name, include_blank: true %>
+    <%= f.input :name, :label => "nom endroit" %>
+  </div>
+
+  <div class="container">
+    <%= f.button :submit, "ajouter endroit" %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Liker:</strong>
+  <%= @aime.liker %>
+</p>
+
+<p>
+  <strong>Liked:</strong>
+  <%= @aime.liked %>
+</p>
+
+<%= link_to 'Edit', edit_aime_path(@aime) %> |
+<%= link_to 'Back', aimes_path %>

@@ -1,0 +1,37 @@
+<div class="container"> 
+    <hr>  
+  <h4>Propriétaire </h4>
+
+  <div class="row comment">
+        <div class="col-sm-3 col-md-2 text-center-xs">
+          <p>
+            <%= image_tag @owner.profile.url(), class:'img-responsive img-circle' %>
+          </p>
+        </div>
+        <div class="col-sm-9 col-md-10">
+          <h5><%= @owner.name %></h5>
+          <p class="posted"><i class="fa fa-clock-o"></i> <%= @owner.created_at.strftime("%d %b. %Y") +" "+ @owner.created_at.strftime("%H:%M")  %></p>
+          <p class="text-gray"><%= @owner.description %>.</p>
+          <p class="reply"><a><i class="fa fa-reply"></i> <label class='label label-info'><%= @owner.cellNumber %></label></a></p>
+          <p class="reply"><a><i class="fa fa-reply"></i> <label class='label label-info'><%= @owner.email %></label></a></p>
+        </div>
+  </div>
+    <section class="background-gray-lightest">
+    <div class="container">
+        <div class="row">
+        <% @ownedPlaces.each do |place| %>
+            <div class="col-sm-4">
+            <div class="post">
+                <div class="image"><%= image_tag place.picture1.url(), class:'img-responsive' %></div>
+                <h3> <%= link_to place.name, place %> </h3>
+                <p class="post__intro"> <%= place.description %></p>
+                <p><%= String(place.views) %> <i class='fa fa-eye' style="color:blue"></i> </p>
+                <p><%= String(place.likes) %> <i class='fa fa-heart' style="color:indianred"></i> </p>
+                <p class="read-more"><%= link_to 'Voir en détail', place, class:'btn btn-ghost' %></p>
+            </div>
+            </div>
+        <% end %>
+        </div>
+    </div>
+    </section>
+</div>

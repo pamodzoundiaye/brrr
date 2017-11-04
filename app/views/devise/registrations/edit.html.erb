@@ -1,0 +1,35 @@
+
+<h2 align="center">Personnalisez votre compte pour plus de visibilité</h2> <p></p>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="container">
+    <%= f.input :name, required: true%>
+    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :cellNumber, required: true, autofocus: true %>
+    <%= f.input :adress, required: true, autofocus: true %>
+    <%= f.input :courtier %>
+    <%= f.text_area :description, :label => "Description", :required => true, class:'form-control', placeholder:'Dites en un peu plus sur vous' %>
+    <br>  
+    <%= f.input :profile, required: false, class:'form-control', label:'Choisissez une photo de profil' %>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <% end %>
+
+    <%= f.input :password, autocomplete: "off", :label => "Mot de passe", hint: "N'y touchez pas si vous ne voulez pas le modifier", required: false %>
+    <%= f.input :password_confirmation, :label => "Confirmation de Mot de passe", required: false %>
+    <%= f.input :current_password, :label => "Mot de passe actuel", hint: "Nous aurons besoin de votre mot de passe actuel" %>
+  </div>
+
+  <div class="container">
+    <%= f.button :submit, "Mettre à jour", :class => 'btn btn-primary btn-lg btn-block' %>
+  </div>
+<% end %>
+
+<p></p><p></p>
+<div align="center">
+<h3 align="center">Résilier votre compte</h3>
+<p>Vous n'êtes pas satisfait? <%= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Etes vous sûr?" }, method: :delete %></p>
+</div>
+

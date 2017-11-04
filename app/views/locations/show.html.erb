@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nom de la ville:</strong>
+  <%= @location.townName %>
+</p>
+
+<p>
+  <strong>Nom de l'endroit:</strong>
+  <%= @location.name %>
+</p>
+
+<%= link_to 'Modifier', edit_location_path(@location) %> |
+<%= link_to 'Retour', admin_path %>

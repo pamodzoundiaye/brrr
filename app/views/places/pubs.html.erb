@@ -1,0 +1,98 @@
+
+<br>
+<div class="container" align="center">  
+  <h1>  Vos Logements</h1>
+  <p> Votre espace personnel où vous pouvez consulter tous les logements que vous avez proposés. Le réglement du site vous propose de supprimer 
+    les logements que vous avez vendus et de marquer comme indisponibles ceux que vous avez cédés temporairement (location par exemple...)
+    Pour plus d'informations, n'hésitez pas à suivre le guide.
+
+  </p>
+</div>
+<div class="container"> 
+    <hr>  
+  <h4 align="center">Propriétaire </h4>
+
+  <div class="row comment">
+        <div class="col-sm-3 col-md-2 text-center-xs">
+          <p>
+            <%= image_tag current_user.profile.url(), class:'img-responsive img-circle' %>
+          </p>
+        </div>
+        <div class="col-sm-9 col-md-10">
+          <h5><%= current_user.name %></h5>
+          <p class="posted"><i class="fa fa-clock-o"></i> <%= current_user.created_at.strftime("%d %b. %Y") +" "+ current_user.created_at.strftime("%H:%M")  %></p>
+          <p class="text-gray"><%= current_user.description %>.</p>
+          <p class="reply"><a><i class="fa fa-phone"></i> <label class='label label-info'><%= current_user.cellNumber %></label></a></p>
+          <p class="reply"><a><i class="fa fa-map-pin"></i> <label class='label label-info'><%= current_user.adress %></label></a></p>
+          <p class="reply"><a><i class="fa fa-envelope"></i> <label class='label label-info'><%= current_user.email %></label></a></p>
+        </div>
+  </div>
+  <br>
+  <hr>
+  <h1 align="center">Logements</h1>
+  <br>
+    
+
+<section class="background-gray-lightest">
+  <div class="container">
+    
+      <% @pubPlaces.each do |place| %>
+        <div class="row" >
+            <div class="post">
+              <div class="col-sm-3">
+                <!-- The image carousel -->
+                  <%= content_tag :div, class:"carousel slide", id:'myCarousele'+String(place.id), 'data-ride' => "carousel" do %> 
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                      <div class="item active">
+                        <%= image_tag place.picture1.url(), class:'img-responsive' %>
+                      </div>
+                      <% if place.picture2.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture2.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture3.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture3.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture4.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture4.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture5.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture5.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <%= content_tag :a, class:"left carousel-control", href:'#myCarousele'+String(place.id), 'data-slide' => "prev" do %>
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                      <span class="sr-only">Previous</span>
+                    <% end %>
+                    <%= content_tag :a, class:"right carousel-control", href:'#myCarousele'+String(place.id), 'data-slide' => "next" do %>
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                      <span class="sr-only">Next</span>
+                    <% end %>
+                  <% end %>
+              </div>
+              <div class="col-sm-9">
+                <h3> <%= link_to place.name, place %> </h3>
+                <p class="post__intro"> <%= place.description %></p>
+                <p><%= String(place.views) %> <i class='fa fa-eye' style="color:blue"></i> </p>
+                <p><%= String(place.likes) %> <i class='fa fa-heart' style="color:indianred"></i> </p>
+                <p><%= link_to 'Voir en détail', place, class:'btn btn-success btn-sm' %><%= link_to 'Modifier', edit_place_path(place), class:'btn btn-warning btn-sm' %><%= link_to 'Supprimer', place, class:'btn btn-danger btn-sm', method: :delete, data: { confirm: 'En Êtes vous certain?'}  %></p>
+              </div>
+            </div>
+         </div>
+        <hr> 
+      <% end %>
+  </div>
+</section>
+
+</div>

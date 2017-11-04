@@ -1,0 +1,50 @@
+
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Places</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Categoryname</th>
+      <th>Price</th>
+      <th>Availability</th>
+      <th>Furnitures</th>
+      <th>Daily</th>
+      <th>Monthly</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @places.each do |place| %>
+      <tr>
+        <td><%= place.name %></td>
+        <td><%= place.description %></td>
+        <td><%= place.categoryName %></td>
+        <td><%= place.price %></td>
+        <td><%= place.availability %></td>
+        <td><%= place.furnitures %></td>
+        <td><%= place.daily %></td>
+        <td><%= place.monthly %></td>
+        <td> <%= image_tag(place.picture1.url(), :size => '200x200') %> </td>
+        <td> <%= image_tag(place.picture2.url(), :size => '200x200') %> </td>
+        <td> <%= image_tag(place.picture3.url(), :size => '200x200') %> </td>
+        <td> <%= image_tag(place.picture4.url(), :size => '200x200') %> </td>
+        <td> <%= image_tag(place.picture5.url(), :size => '200x200') %> </td>
+        <td><%= place.shared %></td>
+        <td><%= link_to 'Show', place %></td>
+        <td><%= link_to 'Edit', edit_place_path(place) %></td>
+        <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Place', new_place_path %>

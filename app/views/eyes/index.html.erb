@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Eyes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Viewer</th>
+      <th>Viewee</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @eyes.each do |eye| %>
+      <tr>
+        <td><%= eye.viewer %></td>
+        <td><%= eye.viewee %></td>
+        <td><%= link_to 'Show', eye %></td>
+        <td><%= link_to 'Edit', edit_eye_path(eye) %></td>
+        <td><%= link_to 'Destroy', eye, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Eye', new_eye_path %>

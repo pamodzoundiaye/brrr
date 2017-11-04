@@ -1,0 +1,36 @@
+<div class="container">
+    <%= search_form_for @q, url: courtiers_path, html: { method: :get } do |f| %>
+    <div class="form-group has-feedback col-md-12">
+    <%= f.label :Rechercher, class:'label label-success' %>
+    <%= f.search_field :name_cont, class:'form-control', placeholder:'Cherchez un courtier' %>
+    </div>  
+    <%= f.check_box :courtier_true, include_hidden: false, checked: true, hidden:true %>
+    <div class="form-group col-md-12">
+    <%= f.submit 'Rechercher', :class => 'btn btn-primary btn-lg btn-block' %>
+    </div>
+    <% end %>
+</div>
+
+
+<% @court.each do |c| %>
+<% if c.courtier==true %>
+<hr>  
+<div class="row comment">
+        <div class="col-sm-3 col-md-2 text-center-xs">
+          <p>
+            <%= image_tag c.profile.url(), class:'img-responsive img-circle' %>
+          </p>
+        </div>
+        <div class="col-sm-9 col-md-10">
+          <h5><%= c.name %></h5>
+          <p class="posted"><i class="fa fa-clock-o"></i> <%= c.created_at.strftime("%d %b. %Y") +" "+ c.created_at.strftime("%H:%M")  %></p>
+          <p class="text-gray"><%= c.description %>.</p>
+          <p class="reply"><a><i class="fa fa-reply"></i> <label class='label label-info'><%= c.cellNumber %></label></a>
+          <a> <label class='label label-primary'><%= c.email %></label></a> 
+          <%= link_to 'Voir articles', shop_path(@c, :type => c.id), class:'btn btn-primary' %>
+          </p>
+        </div>
+  </div>
+  
+<% end %>
+<% end %>

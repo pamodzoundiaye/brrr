@@ -1,0 +1,98 @@
+<div class="container"> 
+    <div class="col-md-12" id="loquesea">
+        <div class="col-md-12" id="buscador-home">
+                    <div class="col-md-12" id="tab-home">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="text-center active"><a href="#Villes" aria-controls="hotel" role="tab" data-toggle="tab"><i class="" aria-hidden="true"></i> Villes</a></li>
+                            <li role="presentation" class="text-center"><a href="#Endroits" aria-controls="tour" role="tab" data-toggle="tab"><i class="" aria-hidden="true"></i> Endroits</a></li>
+                            <li role="presentation" class="text-center"><a href="#Catégories" aria-controls="transfer" role="tab" data-toggle="tab"><i class="" aria-hidden="true"></i>Catégories</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-12" id="content-home">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="Villes" >
+                                    <p id="notice"><%= notice %></p>
+                                    <h1>Villes</h1>
+                                    <table class="table">
+                                    <thead>
+                                        <tr>
+                                        <th>Nom de la ville</th>
+                                        <th colspan="3"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% @towns=Town.all %>
+                                        <% @towns.each do |town| %>
+                                        <tr>
+                                            <td><%= town.name %></td>
+                                            <td><%= link_to 'Afficher', town %></td>
+                                            <td><%= link_to 'Modifier', edit_town_path(town) %></td>
+                                            <td><%= link_to 'Supprimer', town, method: :delete, data: { confirm: 'En Êtes vous certain?' } %></td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                    </table>
+                                    <br>
+                                    <%= link_to 'Ajouter ville', new_town_path %>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="Endroits" >
+                                    <p id="notice"><%= notice %></p>
+                                    <h1>Endroits</h1>
+                                    <table class="table">
+                                    <thead>
+                                        <tr>
+                                        <th>Nom de la ville</th>
+                                        <th>Nom de l'endroit</th>
+                                        <th colspan="3"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% @locations = Location.all %>
+                                        <% @locations.each do |location| %>
+                                        <tr>
+                                            <td><%= location.townName %></td>
+                                            <td><%= location.name %></td>
+                                            <td><%= link_to 'Afficher', location %></td>
+                                            <td><%= link_to 'Modifier', edit_location_path(location) %></td>
+                                            <td><%= link_to 'Supprimer', location, method: :delete, data: { confirm: 'En Êtes vous certain?' } %></td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                    </table>
+                                    <br>
+                                    <%= link_to 'Ajouter endroit', new_location_path %>
+                            </div>
+
+                    
+                            <div role="tabpanel" class="tab-pane" id="Catégories" >
+                                    <p id="notice"><%= notice %></p>
+                                    <h1>Catégories</h1>
+                                    <table class="table">
+                                    <thead>
+                                        <tr>
+                                        <th>Nom de la catégorie</th>
+                                        <th colspan="3"></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <% @categories = Category.all %>
+                                        <% @categories.each do |category| %>
+                                        <tr>
+                                            <td><%= category.name %></td>
+                                            <td><%= link_to 'Afficher', category %></td>
+                                            <td><%= link_to 'Modifier', edit_category_path(category) %></td>
+                                            <td><%= link_to 'Supprimer', category, method: :delete, data: { confirm: 'En Êtes vous certain?' } %></td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                    </table>
+                                    <br>
+                                    <%= link_to 'Ajouter catégorie', new_category_path %>
+
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>    

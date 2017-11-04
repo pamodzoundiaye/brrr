@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Aimes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Liker</th>
+      <th>Liked</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @aimes.each do |aime| %>
+      <tr>
+        <td><%= aime.liker %></td>
+        <td><%= aime.liked %></td>
+        <td><%= link_to 'Show', aime %></td>
+        <td><%= link_to 'Edit', edit_aime_path(aime) %></td>
+        <td><%= link_to 'Destroy', aime, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Aime', new_aime_path %>

@@ -1,0 +1,187 @@
+<script>
+  function like(x){
+    aa=document.getElementById('aimer');
+    bb=document.getElementById('hate');
+    b=document.getElementById('hate').childNodes[0];
+    a=document.getElementById('aimer').childNodes[0];
+    if(true){
+      if((a.style!='color:darkcyan;')){
+            a.style="color:white;";
+            document.getElementById('lll').innerHTML=parseInt(document.getElementById('lll').innerHTML)+1;
+            bb.disabled=false;
+            
+      }else{
+        aa.disabled=true;
+        aa.visible=true;
+      }
+    }
+  }
+  function dislike(x){
+    aa=document.getElementById('aimer');
+    bb=document.getElementById('hate');
+    b=document.getElementById('hate').childNodes[0];
+    a=document.getElementById('aimer').childNodes[0];
+    if(true){
+      if(!(b.style!='color:darkred;')){
+            b.style="color:darkred;";
+            document.getElementById('lll').innerHTML=parseInt(document.getElementById('lll').innerHTML)-1;
+            aa.disabled=false;
+            aa.visible=false;
+      }else{
+        bb.disabled=true;
+        bb.visible=true;
+      }
+    }
+  }
+</script>
+<% if @place.uid!=nil %>
+  <% @user =User.find(@place.uid) %>
+  <hr>  
+  <h4 align="center">Propriétaire </h4>
+
+  <div class="row comment">
+        <div class="col-sm-3 col-md-2 text-center-xs">
+          <p>
+            <%= image_tag @user.profile.url(), class:'img-responsive img-circle' %>
+          </p>
+        </div>
+        <div class="col-sm-9 col-md-10">
+          <h5><%= @user.name %></h5>
+          <p class="posted"><i class="fa fa-clock-o"></i> <%= @user.created_at.strftime("%d %b. %Y") +" "+ @user.created_at.strftime("%H:%M")  %></p>
+          <p class="text-gray"><%= @user.description %>.</p>
+          <p class="reply"><a><i class="fa fa-phone"></i> <label class='label label-info'><%= @user.cellNumber %></label></a></p>
+          <p class="reply"><a><i class="fa fa-map-pin"></i> <label class='label label-info'><%= @user.adress %></label></a></p>
+          <p class="reply"><a><i class="fa fa-envelope"></i> <label class='label label-info'><%= @user.email %></label></a></p>
+        </div>
+  </div>
+<% end %>
+
+<hr>  
+<h4 align="center"><%= @place.name %></h4>
+
+
+          <p>
+            <div class="form-group has-feedback col-md-3">
+                <!-- The image carousel -->
+                  <%= content_tag :div, class:"carousel slide", id:'myCarousele', 'data-ride' => "carousel" do %> 
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                      <div class="item active">
+                        <%= image_tag @place.picture1.url(), class:'img-responsive' %>
+                      </div>
+                      <% if @place.picture2.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag @place.picture2.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if @place.picture3.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag @place.picture3.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if @place.picture4.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag @place.picture4.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if @place.picture5.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag @place.picture5.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <%= content_tag :a, class:"left carousel-control", href:'#myCarousele', 'data-slide' => "prev" do %>
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                      <span class="sr-only">Previous</span>
+                    <% end %>
+                    <%= content_tag :a, class:"right carousel-control", href:'#myCarousele', 'data-slide' => "next" do %>
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                      <span class="sr-only">Next</span>
+                    <% end %>
+                  <% end %>
+              </div>
+              <div class="form-group has-feedback col-md-9">
+                  <blockquote>
+                      <i class='fa fa-eye' id='hhh' style="color:blue"><%= String(@place.views) %> </i> </i class='fa fa-toto'  style="margin-left:5%;">  </i>
+                      <i class='fa fa-heart' id='lll' style="color:indianred;margin-left:5%;"><%= String(@place.likes) %></i> 
+                      <hr>
+                      <strong>Description:</strong> <p></p>
+                        <p> <%= @place.description %>.</p>
+                        <p><strong>Prix: <%= @place.price %> FCFA</strong></p>
+                        
+                        
+                        <hr>
+                        <p>
+                        <% if @place.availability %>
+                          <label class='label label-success'>#Disponible</label>
+                        <% end %>
+                        <% if @place.furnitures %>
+                          <label class='label label-info'>#Meublé</label>
+                        <% end %>
+                        <% if @place.daily %>
+                          <label class='label label-primary'>#Journalier</label>
+                        <% end %>
+                        <% if @place.monthly %>
+                          <label class='label label-primary'>#Mensuel</label>
+                        <% end %>
+                        <% if @place.shared %>
+                          <label class='label label-danger'>#Maison d'Hôtes</label>
+                        <% end %>
+                        <% if @place.forRent %>
+                          <label class='label label-danger'>#A louer</label>
+                        <% end %>
+                        <% if @place.forSale %>
+                          <label class='label label-danger'>#A vendre</label>
+                        <% end %>
+                        </p>
+                      
+                  </blockquote>
+                      <% if current_user!=nil %>
+                          <% if Aime.exists?(liker: current_user.id, liked: @place.id) %>
+                            <%= button_to  place_like_path(@place, :type => @place), method: :get, remote: true, class: 'btn primary', id:'aimer', :onclick => 'like(true)' do %>
+                              <i class="fa fa-thumbs-up" style="color:darkcyan;"></i>
+                            <% end %>
+                          <% else %>
+                            <%= button_to  place_like_path(@place, :type => @place), method: :get, remote: true, class: 'btn primary', id:'aimer', :onclick => 'like(false)'  do %>
+                              <i class="fa fa-thumbs-up"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= button_to place_like_path(@place, :type => @place), method: :get, remote: true, class: 'btn primary', id:'aimer', :onclick => 'like(false)' do %>
+                            <i class="fa fa-thumbs-up"></i>
+                          <% end %>
+                        <% end %>
+                        <% if current_user!=nil %>
+                          <% if Aime.exists?(liker: current_user.id, liked: @place.id) %>
+                            <%= button_to  place_dislike_path(@place, :type => @place), method: :get, remote: true, class: 'btn primary', id:'hate', :onclick => 'dislike(true)' do %>
+                              <i class="fa fa-thumbs-down"></i>
+                            <% end %>
+                          <% else %>
+                            <%= button_to  place_dislike_path(@place, :type => @place), method: :get, remote: true, class: 'btn primary', id:'hate', :onclick => 'dislike(false)' do %>
+                              <i class="fa fa-thumbs-down" style="color:darkred;"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= button_to  place_dislike_path(@place, :type => @place), method: :get, remote: true, class: 'btn primary', id:'hate', :onclick => 'dislike(false)' do %>
+                            <i class="fa fa-thumbs-down" style="color:darkred;"></i>
+                          <% end %>
+                        <% end %>
+                        <% @comms=Comment.where(spot: @place.id) %>
+                      <% @comms.each do |co| %>
+                        <% @comm_user=User.find(co.talker) %>
+                        <% @comm_content = co.speech %>
+                        <%= @comm_user.email %> : <%= co.speech %>
+                      <% end %>
+              </div>
+          </p>
+<%= simple_form_for Comment.new, :id => "new_comment",:controller => "places", :action => "save_comments", :remote => true do |f| %>
+    <%= f.text_area :speech %>
+    <% if current_user!=nil %>
+      <%= f.hidden_field(:talker, :value => current_user.id) %>
+    <% end %>
+    <%= f.hidden_field(:spot, :value => @place.id) %>
+    <%= f.submit "Submit" %>
+<% end %>

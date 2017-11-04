@@ -1,0 +1,11 @@
+<%= simple_form_for(@town) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="container">
+    <%= f.input :name, :label => "Ville" %>
+  </div>
+
+  <div class="container">
+    <%= f.button :submit, "Créer une ville" %>
+  </div>
+<% end %>

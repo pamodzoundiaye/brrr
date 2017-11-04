@@ -1,0 +1,75 @@
+<%= simple_form_for(@place) do |f| %>
+  <%= f.error_notification %>
+
+  <div>
+    <div class="form-group has-feedback col-md-6">
+      <%= f.input :name, :label => "Titre" , placeholder:'Saisissez le nom de votre logement', :required => true %>
+      </div>
+      <div class="form-group has-feedback col-md-6">
+      <%= f.input :price, :label => "Prix (en FCFA)" %>
+    </div>
+  </div>
+  <div>
+      <div class="form-group has-feedback col-md-2">
+        Categorie du logement
+        <%= f.collection_select :categoryName, Category.order(:name),:id,:name, {:include_blank=>true}, {:class=>'form-control', :label => "Catégorie logement", :required => true } %>
+      </div>
+      <div class="form-group has-feedback col-md-2">
+        Emplacement
+        <%= f.collection_select :location, Location.order(:name),:name,:name, {:include_blank=>true, :label => "Emplacement logement"}, {:class=>'form-control', :required => true } %>
+      </div>
+      <div class="form-group has-feedback col-md-1">
+        <%= f.input :availability, :label => "Disponible", class:'form-control' %>
+      </div>
+      <div class="form-group has-feedback col-md-1">
+        <%= f.input :furnitures, :label => "Meublé", class:'form-control' %>
+      </div>
+      <div class="form-group has-feedback col-md-1">
+        <%= f.input :daily, :label => "Journalier", class:'form-control' %>
+      </div>
+      <div class="form-group has-feedback col-md-1">
+        <%= f.input :monthly, :label => "Mensuel", class:'form-control' %>
+      </div>
+      <div class="form-group has-feedback col-md-1">
+        <%= f.input :forSale, :label => "Vente", class:'form-control' %>
+      </div>
+      <div class="form-group has-feedback col-md-1">
+        <%= f.input :forRent, :label => "A louer", class:'form-control' %>
+      </div>
+      <div class="form-group has-feedback col-md-1">
+        <%= f.input :shared, :label => "Hotes", class:'form-control' %>
+      </div>
+      <div class="form-group has-feedback col-md-1">
+        <%= f.input :auberge, :label => "Auberge", class:'form-control' %>
+      </div>
+  </div>
+  </hr>
+  <p></p>
+  <label class='label label-warning'>Postez jusqu'à 5 photos du logement</label><p></p>
+  <div class="form-group has-feedback col-md-12">
+    <div class="form-group has-feedback col-md-4">
+    <%= f.file_field :picture1, class:'form-control' %>
+    </div>
+    <div class="form-group has-feedback col-md-4">
+    <%= f.file_field :picture2, class:'form-control' %>
+    </div>
+    <div class="form-group has-feedback col-md-4">
+    <%= f.file_field :picture3, class:'form-control' %>
+    </div>
+  </div>
+  <div class="form-group has-feedback col-md-12">
+    <div class="form-group has-feedback col-md-6">
+    <%= f.file_field :picture4, class:'form-control' %>
+    </div>
+    <div class="form-group has-feedback col-md-6">
+    <%= f.file_field :picture5, class:'form-control' %>
+    </div>
+  </div>
+    
+  <div class="form-group has-feedback col-md-12">
+    <div><%= f.text_area :description, :label => "Description", :required => true, class:'form-control', placeholder:'Décrivez votre logement autant que possible... (1000 mots)' %></div>    
+  </div>
+  <div class="form-group col-md-12">
+    <%= f.button :submit, 'Publier', :class => 'btn btn-primary btn-lg btn-block' %>
+  </div>
+<% end %>

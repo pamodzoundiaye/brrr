@@ -1,0 +1,206 @@
+<p></p>
+<div class="container" style="background-color:lightgrey; border-radius:25px; opacity:10%;">
+	<div class="col-md-12" id="loquesea">
+        <div class="col-md-12" id="buscador-home">
+    				<div class="col-md-12" id="tab-home">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="text-center active"><a href="#vente" aria-controls="hotel" role="tab" data-toggle="tab"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Vente</a></li>
+							<li role="presentation" class="text-center"><a href="#location" aria-controls="tour" role="tab" data-toggle="tab"><i class="fa fa-key" aria-hidden="true"></i> Location</a></li>
+							<li role="presentation" class="text-center"><a href="#hote" aria-controls="transfer" role="tab" data-toggle="tab"><i class="fa fa-users" aria-hidden="true"></i>Maison d'hôtes</a></li>
+              <li role="presentation" class="text-center"><a href="#demande" aria-controls="transfer" role="tab" data-toggle="tab"><i class="fa fa-users" aria-hidden="true"></i>Formuler Demande</a></li>
+						</ul>
+					</div>
+					<div class="col-md-12" id="content-home">
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="vente" >
+								
+
+                <%= search_form_for @q do |f| %>
+                  <div class="form-group has-feedback col-md-12">
+                    <%= f.label :Rechercher, class:'label label-info' %>
+                    <%= f.search_field :description_cont, class:'form-control', placeholder:'Saisissez un ou plusieurs mots clé ...' %>
+                  </div>  
+                  <div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :catégorie, class:'label label-info' %>
+                    <%= f.collection_select :categoryName_eq, Category.order(:name),:id,:name, {:include_blank=>true}, {:class=>'form-control'} %>
+                    </div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :Lieu, class:'label label-info' %>
+                    <%= f.collection_select :location_eq, Location.order(:name),:name,:name, {:include_blank=>true}, {:class=>'form-control'} %>
+                    </div>
+                    <%= f.check_box :forSale_true, include_hidden: false, checked: true, hidden:true %>
+                    
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :prix_min, class:'label label-info' %>
+                    <%= f.text_field :price_gteq, class:'form-control', min:'10' %>
+                    </div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :prix_max, class:'label label-info' %>
+                    <%= f.text_field :price_lteq, class:'form-control', min:'10' %>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <%= f.submit 'Rechercher', :class => 'btn btn-primary btn-lg btn-block' %>
+                  </div>
+                <% end %>
+								
+							</div>
+							<div role="tabpanel" class="tab-pane" id="location">
+                <%= search_form_for @q do |f| %>
+                  <div class="form-group has-feedback col-md-12">
+                    <%= f.label :Rechercher, class:'label label-primary' %>
+                    <%= f.search_field :description_cont, class:'form-control', placeholder:'Saisissez un ou plusieurs mots clé ...' %>
+                  </div>  
+                  <div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :catégorie, class:'label label-primary' %>
+                    <%= f.collection_select :categoryName_eq, Category.order(:name),:id,:name, {:include_blank=>true}, {:class=>'form-control'} %>
+                    </div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :Lieu, class:'label label-primary' %>
+                    <%= f.collection_select :location_eq, Location.order(:name),:name,:name, {:include_blank=>true}, {:class=>'form-control'} %>
+                    </div>
+                    <%= f.check_box :forRent_true, include_hidden: false, checked: true, hidden:true %>
+                    
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :prix_min, class:'label label-primary' %>
+                    <%= f.text_field :price_gteq, class:'form-control', min:'10' %>
+                    </div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :prix_max, class:'label label-primary' %>
+                    <%= f.text_field :price_lteq, class:'form-control', min:'10' %>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <%= f.submit 'Rechercher', :class => 'btn btn-primary btn-lg btn-block' %>
+                  </div>
+                <% end %>
+
+							</div>
+							<div role="tabpanel" class="tab-pane" id="hote">
+								<%= search_form_for @q do |f| %>
+                  <div class="form-group has-feedback col-md-12">
+                    <%= f.label :Rechercher, class:'label label-success' %>
+                    <%= f.search_field :description_cont, class:'form-control', placeholder:'Saisissez un ou plusieurs mots clé ...' %>
+                  </div>  
+                  <div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :catégorie, class:'label label-success'  %>
+                    <%= f.collection_select :categoryName_eq, Category.order(:name),:id,:name, {:include_blank=>true}, {:class=>'form-control'} %>
+                    </div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :Lieu, class:'label label-success'  %>
+                    <%= f.collection_select :location_eq, Location.order(:name),:name,:name, {:include_blank=>true}, {:class=>'form-control'} %>
+                    </div>
+                    <%= f.check_box :shared_true, include_hidden: false, checked: true, hidden:true %>
+                    
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :prix_min, class:'label label-success'  %>
+                    <%= f.text_field :price_gteq, class:'form-control', min:'10' %>
+                    </div>
+                    <div class="form-group has-feedback col-md-3">
+                    <%= f.label :prix_max, class:'label label-success'  %>
+                    <%= f.text_field :price_lteq, class:'form-control', min:'10' %>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <%= f.submit 'Rechercher', :class => 'btn btn-primary btn-lg btn-block' %>
+                  </div>
+                <% end %>
+							</div>
+              <div role="tabpanel" class="tab-pane" id="demande">
+                <p></p>
+                <div class="form-group has-feedback col-md-12">
+                  <p><label class='label label-success'> Formulez une demande de logement</label></p> 
+                  <% @demande = Demande.new %>
+                  <%= simple_form_for(@demande) do |f| %>
+                    <%= f.error_notification %>
+
+                    <div class="container">
+                      <%= f.text_area :description, :label => "description", placeholder:"Bonjour, je me nomme Mamadou. Je suis à la recherche de ...", class:'form-control' %>
+                    </div>
+                    <p></p>
+                    <div class="container">
+                      <%= f.button :submit, "Publier une demande" %>
+                    </div>
+                  <% end %>
+                </div> 
+              </div>
+						</div>
+					</div>
+				</div>
+	</div>
+</div>
+
+<hr>  
+<section class="background-gray-lightest">
+  <div class="container">
+    
+      <% @neededPlaces.each do |place| %>
+        <div class="row" >
+            <div class="post">
+              <div class="col-sm-3">
+                <!-- The image carousel -->
+                  <%= content_tag :div, class:"carousel slide", id:'myCarousele'+String(place.id), 'data-ride' => "carousel" do %> 
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                      <div class="item active">
+                        <%= image_tag place.picture1.url(), class:'img-responsive' %>
+                      </div>
+                      <% if place.picture2.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture2.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture3.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture3.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture4.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture4.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+                      <% if place.picture5.url()!='house.png' %>
+                        <div class="item">
+                          <%= image_tag place.picture5.url(), class:'img-responsive' %>
+                        </div>
+                      <% end %>
+
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <%= content_tag :a, class:"left carousel-control", href:'#myCarousele'+String(place.id), 'data-slide' => "prev" do %>
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                      <span class="sr-only">Previous</span>
+                    <% end %>
+                    <%= content_tag :a, class:"right carousel-control", href:'#myCarousele'+String(place.id), 'data-slide' => "next" do %>
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                      <span class="sr-only">Next</span>
+                    <% end %>
+                  <% end %>
+              </div>
+              <div class="col-sm-9">
+                <h3> <%= link_to place.name, place %> </h3>
+                <p class="post__intro"> <%= place.description %></p>
+                <i class='fa fa-eye' style="color:blue"><%= String(place.views) %> </i> </i class='fa fa-toto'  style="margin-left:5%;">  </i>
+                      <i class='fa fa-heart' style="color:indianred;margin-left:5%;"><%= String(place.likes) %></i>
+                <p class="read-more"><%= link_to 'Voir en détail', place, class:'btn btn-ghost' %></p>
+              </div>
+            </div>
+         </div>
+        <hr> 
+      <% end %>
+  </div>
+
+
+
+
+
+
+
+
+
+</section>
